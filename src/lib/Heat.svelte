@@ -4,18 +4,17 @@
   import { onMount, onDestroy, getContext } from 'svelte';
 
   const L = window.L;
-  export let points;
+  export let latlngs;
+	export let options = {};
   let heat;
 
   let parentContext = getContext(Map);
   const { getMap } = parentContext;
-  let ready = false;
 
   $: map = getMap();
 
   onMount(() => {
-    heat = L.heatLayer(points);
-    ready = true;
+    heat = L.heatLayer(latlngs, options);
   });
 
   $: if (map) {
