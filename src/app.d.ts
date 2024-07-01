@@ -10,15 +10,7 @@ declare global {
 		// interface Platform {}
 	}
 
-	// interface HeatOptions {}
-
-	// namespace L {
-	// 	function heatLayer(latlngs: LatLngBoundsExpression[], options?: HeatOptions): Layer;
-	// }
-
-	// interface Window {
-	// 	L: L;
-	// }
+	export declare const __VERSION__: string;
 }
 
 /**

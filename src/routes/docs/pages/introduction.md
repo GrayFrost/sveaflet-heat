@@ -1,10 +1,14 @@
 ---
 layout: componentLayout
-breadcrumb_title: todo
-title: todo
-component_title: todo
+breadcrumb_title: introduction
+title: Introduction
+component_title: Introduction
 dir: pages
-description: todo
+description: Quick start to Sveaflet-Heat
 ---
 
-introduction
+## Quick Start
+
+```bash
+npm install sveaflet-heat
+```

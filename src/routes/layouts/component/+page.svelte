@@ -15,7 +15,7 @@
 
 	// import MetaTag from '../../utils/MetaTag.svelte';
 	import Toc from '../../utils/Toc.svelte';
-	// import PageHeadSection from '../../utils/PageHeadSection.svelte';
+	import PageHeadSection from '../../utils/PageHeadSection.svelte';
 	// import Paging from '../../utils/Paging.svelte';
 	import { extract } from './Anchor.svelte';
 
@@ -38,7 +38,7 @@
 	<div
 		class="flex flex-col max-w-4xl mx-auto px-4 min-w-0 pt-6 lg:px-8 lg:pt-8 pb:12 xl:pb-24 lg:pb-16 divide-y divide-gray-200 dark:divide-gray-800"
 	>
-		<!-- <PageHeadSection {dir} {title} {description} /> -->
+		<PageHeadSection {dir} {title} {description} />
 		<div id="mainContent" class="py-8">
 			<slot />
 			<!-- <Paging /> -->
