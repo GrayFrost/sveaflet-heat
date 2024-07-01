@@ -1,5 +1,5 @@
 <script lang="ts">
-	// import { twMerge } from 'tailwind-merge';
+	import { twMerge } from 'tailwind-merge';
 
 	export let divClass = 'w-full mx-auto bg-gradient-to-r bg-white dark:bg-gray-900 p-6';
 	// the source of the example, if you want it
@@ -61,10 +61,9 @@
 				class:dark
 			>
 				<div class="w-full code-responsive-wrapper">
-					<!-- <div class={twMerge(divClass, meta.class)}>
+					<div class={twMerge(divClass, meta.class)}>
 						<slot name="example" />
-					</div> -->
-					<div><slot name="example" /></div>
+					</div>
 				</div>
 			</div>
 		</div>

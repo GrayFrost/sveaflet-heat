@@ -1,19 +1,24 @@
 <script lang="ts">
 	import { Map } from 'leaflet';
-	import type { HeatMapOptions, LatLng, HeatLayer } from 'leaflet';
+	import type { HeatMapOptions, HeatLayer, LatLng, HeatLatLngTuple } from 'leaflet';
 	import 'leaflet.heat';
 	import { onMount, onDestroy, getContext } from 'svelte';
 	import type { LeafletContextInterface } from 'sveaflet';
 
 	const L = window.L;
-	export let latlngs: LatLng[];
+	export let latlngs: Array<LatLng | HeatLatLngTuple>;
 	export let options: HeatMapOptions = {};
-	let heat: HeatLayer | undefined;
+	export let instance: HeatLayer | undefined = undefined;
 
+	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap } = parentContext;
 
+	// data
+	let heat: HeatLayer | undefined;
+
 	$: map = getMap();
+	$: instance = heat;
 
 	onMount(() => {
 		heat = L.heatLayer(latlngs, options);

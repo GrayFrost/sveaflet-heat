@@ -7,7 +7,7 @@
 	import { Map, TileLayer, Marker, Popup } from 'sveaflet';
 	import { addressPoints } from '../routes/docs/assets/realword.10000';
 	// import Footer from './utils/Footer.svelte';
-	import Heat from '$lib/Heat.svelte';
+	import Heat from '$lib/SHeat.svelte';
 
 	let logo = '/images/sveaflet.png';
 	let marker: MarkerType;
@@ -33,22 +33,22 @@
 	}}
 /> -->
 
-<main class="flex-auto min-w-0 lg:static lg:max-h-full lg:overflow-visible">
+<main class="min-w-0 flex-auto lg:static lg:max-h-full lg:overflow-visible">
 	<!-- <div class="flex justify-center items-center mx-auto my-8 relative w-[240px] h-[200px]">
 		<img src={logo} alt="logo" class="w-full h-full" />
 	</div> -->
-	<p class="flex justify-center my-8 text-lg lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
+	<p class="my-8 flex justify-center text-lg sm:px-16 lg:text-xl xl:px-48 dark:text-gray-400">
 		Sveaflet-Heat - A plugin of Sveaflet
 	</p>
 
-	<div class="flex justify-center my-8">
+	<div class="my-8 flex justify-center">
 		<Button href="/docs/pages/introduction"
-			>Get Started<ArrowRightOutline class="w-6 h-6 ms-2" /></Button
+			>Get Started<ArrowRightOutline class="ms-2 h-6 w-6" /></Button
 		>
 	</div>
 
 	<div
-		class="h-[600px] px-4 lg:h-[600px] lg:px-20 md:h-[320px] md:px-10 my-8 mx-auto max-w-[90rem] py-8"
+		class="mx-auto my-8 h-[600px] max-w-[90rem] px-4 py-8 md:h-[320px] md:px-10 lg:h-[600px] lg:px-20"
 	>
 		<Map
 			options={{
@@ -57,7 +57,7 @@
 			}}
 		>
 			<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-			<Heat latlngs={addressPoints.map((item) => latLng([Number(item[0]), Number(item[1])]))} />
+			<Heat latlngs={addressPoints.map((item) => latLng(Number(item[0]), Number(item[1])))} />
 		</Map>
 	</div>
 	<!-- <Footer /> -->
