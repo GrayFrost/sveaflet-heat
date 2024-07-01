@@ -1,6 +1,14 @@
 {
 	"name": "sveaflet-heat",
 	"version": "0.0.1",
+	"author": {
+		"name": "GrayFrost",
+		"email": "garyfrost4321@gmail.com",
+		"url": "https://github.com/GrayFrost"
+	},
+	"bugs": "https://github.com/GrayFrost/sveaflet-heat/issues",
+	"homepage": "https://sveaflet-heat.vercel.app/",
+	"license": "MIT",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
@@ -10,7 +18,23 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"package:publish": "npm publish"
+	},
+	"keywords": [
+		"svelte",
+		"sveltekit",
+		"leaflet",
+		"leatlet.heat",
+		"heat",
+		"heatlayer"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/GrayFrost/sveaflet-heat.git"
+	},
+	"engines": {
+		"node": ">=20.12.0"
 	},
 	"exports": {
 		".": {
