@@ -57,7 +57,7 @@
 			}}
 		>
 			<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-			<Heat latlngs={addressPoints.map((item) => latLng(Number(item[0]), Number(item[1])))} />
+			<Heat latLngs={addressPoints.map((item) => latLng(Number(item[0]), Number(item[1])))} />
 		</Map>
 	</div>
 	<!-- <Footer /> -->

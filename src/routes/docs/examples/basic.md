@@ -24,7 +24,7 @@ description: Examples about how to use Sveaflet-Heat
 	import { Heat } from 'sveaflet-heat';
 	import { addressPoints } from '../assets/realword.10000.js';
 
-	$: latlngs = addressPoints.map((item) => latLng([item[0], item[1]].map(Number)));
+	$: latLngs = addressPoints.map((item) => latLng([item[0], item[1]].map(Number)));
 </script>
 
 <div style="width:100%; height:500px;">
@@ -35,7 +35,7 @@ description: Examples about how to use Sveaflet-Heat
 				attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 			}}
 		/>
-		<Heat {latlngs} />
+		<Heat {latLngs} />
 	</Map>
 </div>
 ```
@@ -49,7 +49,7 @@ description: Examples about how to use Sveaflet-Heat
 	import { Heat } from 'sveaflet-heat';
 	import { addressPoints } from '../assets/realword.10000.js';
 
-	$: latlngs = addressPoints.map((item) => latLng([item[0], item[1]].map(Number)));
+	$: latLngs = addressPoints.map((item) => latLng([item[0], item[1]].map(Number)));
 </script>
 
 <div style="width:100%; height:500px;">
@@ -61,7 +61,7 @@ description: Examples about how to use Sveaflet-Heat
 			}}
 		/>
 		<Heat
-			{latlngs}
+			{latLngs}
 			options={{
 				gradient: {
 					0.4: 'pink',
