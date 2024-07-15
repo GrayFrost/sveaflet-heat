@@ -6,7 +6,7 @@
 	import type { LeafletContextInterface } from 'sveaflet';
 
 	const L = window.L;
-	export let latlngs: Array<LatLng | HeatLatLngTuple>;
+	export let latLngs: Array<LatLng | HeatLatLngTuple>;
 	export let options: HeatMapOptions = {};
 	export let instance: HeatLayer | undefined = undefined;
 
@@ -21,7 +21,7 @@
 	$: instance = heat;
 
 	onMount(() => {
-		heat = L.heatLayer(latlngs, options);
+		heat = L.heatLayer(latLngs, options);
 	});
 
 	$: if (map) {
