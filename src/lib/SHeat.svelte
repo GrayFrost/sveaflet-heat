@@ -6,29 +6,42 @@
 	import type { LeafletContextInterface } from 'sveaflet';
 
 	const L = window.L;
-	export let latLngs: Array<LatLng | HeatLatLngTuple>;
-	export let options: HeatMapOptions = {};
-	export let instance: HeatLayer | undefined = undefined;
+
+	// props
+	type Props = {
+		latLngs: Array<LatLng | HeatLatLngTuple>;
+		options?: HeatMapOptions;
+		instance?: HeatLayer;
+	} & {
+		[key: string]: unknown;
+	};
+
+	let { latLngs, options = {}, instance = $bindable(), ...restProps }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap } = parentContext;
 
 	// data
-	let heat: HeatLayer | undefined;
+	let heat: HeatLayer | undefined = $state();
 
-	$: map = getMap();
-	$: instance = heat;
+	let map = $derived(getMap());
+
+	$effect(() => {
+		instance = heat;
+	});
 
 	onMount(() => {
 		heat = L.heatLayer(latLngs, options);
 	});
 
-	$: if (map) {
-		if (heat) {
-			map.addLayer(heat);
+	$effect(() => {
+		if (map) {
+			if (heat) {
+				map.addLayer(heat);
+			}
 		}
-	}
+	});
 
 	onDestroy(() => {
 		heat?.remove();
