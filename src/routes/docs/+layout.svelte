@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import { afterNavigate } from '$app/navigation';
 	import { getContext } from 'svelte';
-  import type { Writable } from 'svelte/store';
+	import type { Writable } from 'svelte/store';
 	import {
 		Sidebar,
 		SidebarGroup,
@@ -12,10 +12,19 @@
 	} from 'flowbite-svelte';
 	import { ChevronDownOutline, ChevronUpOutline } from 'flowbite-svelte-icons';
 
-	export let data: any; // todo typescript
+	interface Props {
+		data: AllPage;
+		children?: import('svelte').Snippet;
+	}
+
+	let { data, children }: Props = $props();
 
 	const posts: Record<string, any[]> = data.posts;
 	const drawerHidden: Writable<boolean> = getContext('drawer');
+
+	$effect(() => {
+		console.log("zzh hello", data);
+	})
 
 	const closeDrawer = () => {
 		drawerHidden.set(true);
@@ -27,8 +36,8 @@
 
 	const fileDir = (path: string) => path.split('/').slice(0, -1).pop() ?? '';
 
-	$: mainSidebarUrl = $page.url.pathname;
-	let activeMainSidebar: string;
+	let mainSidebarUrl = $derived($page.url.pathname);
+	let activeMainSidebar: string | undefined = $state();
 
 	afterNavigate((navigation) => {
 		document.getElementById('svelte')?.scrollTo({ top: 0 });
@@ -47,7 +56,7 @@
 	let activeClass =
 		'relative flex items-center flex-wrap font-medium cursor-default text-primary-700 dark:text-primary-700';
 
-	let dropdowns = Object.fromEntries(Object.keys(posts).map((x) => [x, false]));
+	let dropdowns = $state(Object.fromEntries(Object.keys(posts).map((x) => [x, false])));
 </script>
 
 <Sidebar
@@ -60,7 +69,7 @@
 	<SidebarWrapper
 		divClass="overflow-y-auto px-4 pt-20 lg:pt-0 h-full bg-white scrolling-touch max-w-2xs lg:h-[calc(100vh-8rem)] lg:block dark:bg-gray-900 lg:me-0 lg:sticky top-20"
 	>
-		<nav class="font-normal text-base lg:text-sm">
+		<nav class="text-base font-normal lg:text-sm">
 			<SidebarGroup ulClass="list-unstyled fw-normal small mb-4">
 				{#each Object.entries(posts) as [key, values] (key)}
 					<SidebarDropdownWrapper
@@ -73,8 +82,12 @@
 							? 'text-primary-700 dark:text-primary-700'
 							: 'text-gray-900 dark:text-white'}
 					>
-						<ChevronDownOutline slot="arrowdown" class="w-6 h-6 text-gray-800 dark:text-white" />
-						<ChevronUpOutline slot="arrowup" class="w-6 h-6 text-gray-800 dark:text-white" />
+						{#snippet arrowdown()}
+							<ChevronDownOutline class="h-6 w-6 text-gray-800 dark:text-white" />
+						{/snippet}
+						{#snippet arrowup()}
+							<ChevronUpOutline class="h-6 w-6 text-gray-800 dark:text-white" />
+						{/snippet}
 						{#each values as { meta, path }}
 							{@const href = `/docs/${key}${path}`}
 							{#if meta}
@@ -94,14 +107,13 @@
 	</SidebarWrapper>
 </Sidebar>
 
-
 <div
 	hidden={$drawerHidden}
 	class="fixed inset-0 z-20 bg-gray-900/50 dark:bg-gray-900/60"
-	on:click={closeDrawer}
-	on:keydown={closeDrawer}
+	onclick={closeDrawer}
+	onkeydown={closeDrawer}
 	role="presentation"
-/>
-<main class="flex-auto w-full min-w-0 lg:static lg:max-h-full lg:overflow-visible">
-	<slot />
+></div>
+<main class="w-full min-w-0 flex-auto lg:static lg:max-h-full lg:overflow-visible">
+	{@render children?.()}
 </main>

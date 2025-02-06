@@ -24,7 +24,7 @@ description: Examples about how to use Sveaflet-Heat
 	import { Heat } from 'sveaflet-heat';
 	import { addressPoints } from '../assets/realword.10000.js';
 
-	$: latLngs = addressPoints.map((item) => latLng([item[0], item[1]].map(Number)));
+	let latLngs = $state(addressPoints.map((item) => latLng([item[0], item[1]].map(Number))));
 </script>
 
 <div style="width:100%; height:500px;">
@@ -49,7 +49,7 @@ description: Examples about how to use Sveaflet-Heat
 	import { Heat } from 'sveaflet-heat';
 	import { addressPoints } from '../assets/realword.10000.js';
 
-	$: latLngs = addressPoints.map((item) => latLng([item[0], item[1]].map(Number)));
+	let latLngs = $state(addressPoints.map((item) => latLng([item[0], item[1]].map(Number))));
 </script>
 
 <div style="width:100%; height:500px;">

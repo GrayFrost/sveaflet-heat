@@ -4,17 +4,18 @@
 	import { ArrowRightOutline } from 'flowbite-svelte-icons';
 	import { latLng } from 'leaflet';
 	import type { Marker as MarkerType } from 'leaflet';
-	import { Map, TileLayer, Marker, Popup } from 'sveaflet';
+	import { Map, TileLayer } from 'sveaflet';
 	import { addressPoints } from '../routes/docs/assets/realword.10000';
-	// import Footer from './utils/Footer.svelte';
 	import Heat from '$lib/SHeat.svelte';
 
 	let logo = '/images/sveaflet.png';
-	let marker: MarkerType;
+	let marker: MarkerType | undefined = $state();
 
-	$: if (marker) {
-		marker.openPopup();
-	}
+	$effect(() => {
+		if (marker) {
+			marker.openPopup();
+		}
+	});
 
 	let title = 'Sveaflet-Heat - A plugin of Sveaflet';
 	let description =
